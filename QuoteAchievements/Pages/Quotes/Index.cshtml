@@ -1,0 +1,36 @@
+﻿@page
+@model QuoteAchievements.Pages.Quotes.IndexModel
+@{
+}
+
+<br />
+<h2> List of Quotes </h2>
+<a class ='btn btn-outline-primary btn-sm' href='/Quotes/Create'>New Quote</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Quote</th>
+            <th>Author</th>
+            <th>IsFavourite</th>
+            <th>Category ID</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.listQuotes)
+        {
+            <tr>
+                <td>@item.id</td>
+                <td>@item.quote</td>
+                <td>@item.author</td>
+                <td>@item.IsFavourite</td>
+                <td>@item.category_id</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Quotes/Edit?id=">Edit</a>
+                    <a class="btn btn-primary btn-sm" href="/Quotes/Delete?id=">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
