@@ -19,6 +19,7 @@ namespace QuoteAchievements.Pages.Quotes
                 using (SqlConnection connection = new SqlConnection(connectionString)) 
                 {
                     connection.Open();
+
                     String sql = "SELECT * FROM quotes";
                     using (SqlCommand command = new SqlCommand(sql, connection)) 
                     {
@@ -26,17 +27,35 @@ namespace QuoteAchievements.Pages.Quotes
                         {
                             while (reader.Read()) 
                             {
-                                QuotesInfo quotesInfo = new QuotesInfo();
-                                var authorTemp = reader.GetValue(1);
-                                quotesInfo.id = "" + reader.GetInt32(0);
-
-
-                                quotesInfo.author = reader.SafeGetString(1);
-                                //quotesInfo.author = (string)reader.GetValue(2)??string.Empty;
-                                //quotesInfo.IsFavourite = reader.GetBoolean(3).ToString();
-                                //quotesInfo.category_id = "" + reader.GetInt32(4);
-
+                                QuotesInfo quotesInfo = new QuotesInfo
+                                {
+                                    id = "" + reader.GetInt32(0),
+                                    author = reader.SafeGetString(1),
+                                    quote = reader.SafeGetString(2),
+                                    IsFavourite = reader.GetBoolean(3).ToString()
+                                };
+                                
                                 listQuotes.Add(quotesInfo);
+                            }
+                        }
+                    }
+
+                    String sql2 = "SELECT quotes.id, category.name FROM quotes INNER JOIN category ON quotes.category_id = category.id ";
+                    using (SqlCommand command = new SqlCommand(sql2, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string quoteId = "" + reader.GetInt32(0);
+                                string categoryName = reader.SafeGetString(1);
+
+                                QuotesInfo? quote = listQuotes.Find(q => q.id == quoteId);
+                                if (quote != null)
+                                {
+                                    quote.category_name = categoryName;
+                                }
+
                             }
                         }
                     }
@@ -55,6 +74,6 @@ namespace QuoteAchievements.Pages.Quotes
         public String quote;
         public String author;
         public String IsFavourite;
-        public String category_id;
+        public String category_name;
     }
 }

@@ -9,11 +9,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
             <th>Quote</th>
             <th>Author</th>
             <th>IsFavourite</th>
-            <th>Category ID</th>
+            <th>Category</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -21,14 +20,13 @@
         @foreach(var item in Model.listQuotes)
         {
             <tr>
-                <td>@item.id</td>
                 <td>@item.quote</td>
                 <td>@item.author</td>
                 <td>@item.IsFavourite</td>
-                <td>@item.category_id</td>
+                <td>@item.category_name</td>
                 <td>
-                    <a class="btn btn-primary btn-sm" href="/Quotes/Edit?id=">Edit</a>
-                    <a class="btn btn-primary btn-sm" href="/Quotes/Delete?id=">Delete</a>
+                    <a class="btn btn-primary btn-sm" href="/Quotes/Edit?id=@item.id">Edit</a>
+                    <a class="btn btn-primary btn-sm" href="/Quotes/Delete?id=@item.id">Delete</a>
                 </td>
             </tr>
         }
