@@ -32,7 +32,7 @@ namespace QuoteAchievements.Pages.Quotes
                                     id = "" + reader.GetInt32(0),
                                     author = reader.SafeGetString(1),
                                     quote = reader.SafeGetString(2),
-                                    IsFavourite = reader.GetBoolean(3).ToString(),
+                                    IsFavourite = reader.SafeGetBoolean(3).ToString(),
                                     category_name = reader.SafeGetString(4),
                                 };
                                 

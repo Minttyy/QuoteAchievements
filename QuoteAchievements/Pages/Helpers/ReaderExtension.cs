@@ -11,5 +11,12 @@ namespace QuoteAchievements.Pages.Helpers
             return string.Empty;
 
         }
+
+        public static Boolean SafeGetBoolean(this SqlDataReader reader, int colIndex)
+        {
+            if (!reader.IsDBNull(colIndex))
+                return reader.GetBoolean(colIndex);
+            return false;
+        }
     }
 }
