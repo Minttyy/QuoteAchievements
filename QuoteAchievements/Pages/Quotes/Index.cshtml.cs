@@ -11,8 +11,13 @@ namespace QuoteAchievements.Pages.Quotes
     public class IndexModel : PageModel
     {
         public List<QuotesInfo> listQuotes = new List<QuotesInfo>();
+        public string SuccessMessage { get; private set; } = "";
+        public string DeletionMessage { get; private set; } = "";
         public void OnGet()
         {
+            SuccessMessage = TempData["SuccessMessage"] as string;
+            DeletionMessage = TempData["DeletionMessage"] as string;
+
             try
             {
                 String connectionString = "Data Source=(local)\\SQLEXPRESSSERVER;Initial Catalog=webpage;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
@@ -20,7 +25,7 @@ namespace QuoteAchievements.Pages.Quotes
                 {
                     connection.Open();
 
-                    String sql = "SELECT quotes.id, quotes.author, quotes.quote, quotes.IsFavourite, category.name FROM quotes INNER JOIN category ON quotes.category_id = category.id ";
+                    String sql = "SELECT quotes.id, quotes.author, quotes.quote, quotes.IsFavourite, category.name FROM quotes LEFT JOIN category ON quotes.category_id = category.id ";
                     using (SqlCommand command = new SqlCommand(sql, connection)) 
                     {
                         using ( SqlDataReader reader = command.ExecuteReader()) 
@@ -46,6 +51,7 @@ namespace QuoteAchievements.Pages.Quotes
             {
                 Console.WriteLine("Exception: " + ex.ToString());
             }
+
         }
     }
 

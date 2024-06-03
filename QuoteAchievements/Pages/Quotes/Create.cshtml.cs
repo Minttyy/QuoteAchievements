@@ -9,10 +9,7 @@ namespace QuoteAchievements.Pages.Quotes
     {
         public QuotesInfo quotesInfo = new QuotesInfo();
         public String errorMessage = "";
-        public String successMessage = "";
-        public void OnGet()
-        {
-        }
+        public String successMessage { get; set; } = "";
 
         public void OnPost() 
         {
@@ -51,9 +48,10 @@ namespace QuoteAchievements.Pages.Quotes
             }
 
             quotesInfo.author = ""; quotesInfo.quote = ""; quotesInfo.IsFavourite = "";
-            successMessage = "New client added correctly!";
+            TempData["SuccessMessage"] = "New quote is added correctly!";
 
             Response.Redirect("/Quotes/Index");
         }
+
     }
 }

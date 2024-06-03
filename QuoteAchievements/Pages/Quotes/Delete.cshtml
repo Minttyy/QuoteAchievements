@@ -22,6 +22,7 @@
         Console.WriteLine("Exception: " + ex.ToString());
     }
 
+    TempData["DeletionMessage"] = "Quote has been deleted successfully!";
     Response.Redirect("/Quotes/Index");
 
 }

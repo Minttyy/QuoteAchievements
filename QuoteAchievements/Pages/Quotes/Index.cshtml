@@ -6,6 +6,21 @@
 <br />
 <h2> List of Quotes </h2>
 <a class ='btn btn-outline-primary btn-sm' href='/Quotes/Create'>New Quote</a>
+
+@if (!string.IsNullOrEmpty(Model.SuccessMessage))
+{
+    <div class="alert alert-success">
+        @Model.SuccessMessage
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(Model.DeletionMessage))
+{
+    <div class="alert alert-info">
+        @Model.DeletionMessage
+    </div>
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -25,8 +40,10 @@
                 <td>@item.IsFavourite</td>
                 <td>@item.category_name</td>
                 <td>
-                    <a class="btn btn-primary btn-sm" href="/Quotes/Edit?id=@item.id">Edit</a>
-                    <a class="btn btn-primary btn-sm" href="/Quotes/Delete?id=@item.id">Delete</a>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-primary btn-sm" style="margin-right: 10px;" href="/Quotes/Edit?id=@item.id">Edit</a>
+                        <a class="btn btn-danger btn-sm" href="/Quotes/Delete?id=@item.id">Delete</a>
+                    </div> 
                 </td>
             </tr>
         }
