@@ -21,6 +21,13 @@
     </div>
 }
 
+@if (!string.IsNullOrEmpty(Model.EditMessage))
+{
+    <div class="alert alert-info">
+        @Model.EditMessage
+    </div>
+}
+
 <table class="table">
     <thead>
         <tr>

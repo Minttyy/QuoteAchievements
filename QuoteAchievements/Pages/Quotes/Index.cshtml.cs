@@ -13,10 +13,12 @@ namespace QuoteAchievements.Pages.Quotes
         public List<QuotesInfo> listQuotes = new List<QuotesInfo>();
         public string SuccessMessage { get; private set; } = "";
         public string DeletionMessage { get; private set; } = "";
+        public string EditMessage { get; private set; } = "";
         public void OnGet()
         {
             SuccessMessage = TempData["SuccessMessage"] as string;
             DeletionMessage = TempData["DeletionMessage"] as string;
+            EditMessage = TempData["EditMessage"] as string;
 
             try
             {

@@ -28,8 +28,8 @@ namespace QuoteAchievements.Pages.Quotes
                             if (reader.Read())
                             {
                                 quotesInfo.id = "" + reader.GetInt32(0);
-                                quotesInfo.quote = reader.GetString(1);
-                                quotesInfo.author = reader.GetString(2);
+                                quotesInfo.author = reader.GetString(1);
+                                quotesInfo.quote = reader.GetString(2);
                             }
                         }
                     }
@@ -59,9 +59,7 @@ namespace QuoteAchievements.Pages.Quotes
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    String sql = "UPDATE quotes" +
-                                 "SET quote=@quote, author=@author" +
-                                 "WHERE id=@id;";
+                    String sql = "UPDATE quotes SET quote=@quote, author=@author WHERE id=@id;";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
@@ -79,6 +77,7 @@ namespace QuoteAchievements.Pages.Quotes
                 return;
             }
 
+            TempData["EditMessage"] = "Quote has been edited successfully!";
             Response.Redirect("/Quotes/Index");
         }
     }
