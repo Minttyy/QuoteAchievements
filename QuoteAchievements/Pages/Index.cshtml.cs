@@ -4,6 +4,8 @@ using QuoteAchievements.Pages.Quotes;
 using QuoteAchievements.Pages.Helpers;
 using System.Data.SqlClient;
 
+
+// Testing
 namespace QuoteAchievements.Pages
 {
     public class IndexModel : PageModel
